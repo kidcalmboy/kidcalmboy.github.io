@@ -1,16 +1,19 @@
-# Terminal Portfolio
+# Infrastructure Archive
 
-Linux terminal interaction, a GitHub study archive, and a developer portfolio in one web experience.
+A first-person infrastructure lab for exploring a future GitHub study archive.
 
 ## Current Status
 
-The project is in its initial layout phase. The application shell includes the header, navigation, terminal workspace, profile panel, and responsive styling.
+The local development version contains a fullscreen 3D lab, mouse-look, WASD movement, Space jumping, static collision and an E-operated door leading through a corridor to a Linux room. The door stays open after activation. ESC pauses and releases the mouse. Actual repository contents and archive boxes are not connected yet.
+
+Legacy terminal JSX files remain as migration references; the active entry point is src/main.tsx. See docs/ARCHITECTURE.md for the longer-term design. Changes appear on the public site only after pushing main and a successful deployment.
 
 ## Tech Stack
 
 - Vite
 - React
-- JavaScript
+- TypeScript (strict for the new application)
+- Three.js / React Three Fiber
 - CSS
 - GitHub REST API (planned)
 - GitHub Pages
@@ -27,13 +30,14 @@ npm run dev
 ```bash
 npm run lint
 npm run build
+node --experimental-strip-types --test tests/physics.test.ts
 ```
 
 Production builds are deployed to [kidcalmboy.github.io](https://kidcalmboy.github.io/) with GitHub Actions.
 
 ## Roadmap
 
-- Implement the terminal command engine
-- Add the virtual file system
-- Connect public study repositories through the GitHub REST API
-- Improve keyboard interaction and responsive behavior
+- Add archive boxes and a Markdown document viewer
+- Generate content from explicitly configured public study repositories
+- Provide accessible document mode and mobile navigation
+- Measure rendering performance and improve assets
