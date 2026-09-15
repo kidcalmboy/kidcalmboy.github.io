@@ -1,0 +1,97 @@
+/* NOVA's macOS-inspired shell. Kept separate from the investigation UI. */
+:root {font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif}
+.desktop,.lock {
+  background:radial-gradient(ellipse at 80% 110%,#e0a6a2aa,transparent 55%),
+    radial-gradient(ellipse at 5% 95%,#2d66aa,transparent 65%),
+    radial-gradient(ellipse at 80% 0%,#8d6890aa,transparent 55%),#1e294e;
+}
+.desktop:before,.lock:before {
+  content:'';position:absolute;pointer-events:none;width:130vw;height:80vh;
+  left:-20vw;top:46vh;border-radius:48% 60% 0 0;transform:rotate(-18deg);
+  background:linear-gradient(175deg,#a1bad444,#19284b88 30%,#122548);
+  box-shadow:0 -2px 2px #e1d1ee22,0 -40px 100px #a9acde22;
+}
+.city {opacity:.13}
+.desktop-title {top:16%;left:8%;opacity:.72}
+.desktop-title h1 {font-size:clamp(35px,4.5vw,64px);font-weight:300;letter-spacing:-2px;color:#f1edf5}
+.desktop-title .eyebrow,.desktop-title>p span {color:#bac5db}
+.topbar {height:32px;padding:0 22px;background:#24213345;backdrop-filter:blur(35px) saturate(160%);border-bottom:1px solid #ffffff12;box-shadow:0 1px 8px #15132612;color:#f4f1f8}
+.topbar b {font-weight:700;letter-spacing:1.8px}
+.topbar>div {gap:23px}
+.topbar>div:first-child>span {font-weight:600}
+.topbar button {font-size:11px}
+.app-window {background:#20232cdb;border:1px solid #b6bbc44a;border-radius:13px;backdrop-filter:blur(50px) saturate(150%);box-shadow:0 35px 90px #070a2066,0 4px 12px #0004,inset 0 1px #ffffff18}
+.window-bar {height:49px;background:linear-gradient(#45454ddd,#35353fdd);border-bottom:1px solid #11131b88;padding:0 19px;color:#efeff3;font-size:12px;font-weight:600;position:relative}
+.window-bar>span {position:absolute;left:50%;transform:translateX(-50%);pointer-events:none}
+.window-bar small {color:#a7a7b4;font-weight:400;font-size:8px}
+.window-controls {gap:8px}
+.window-controls button {width:13px;height:13px;background:#ff5f57;border:1px solid #e0443e;color:transparent;box-shadow:inset 0 1px #ffffff20}
+.window-controls button:nth-child(2) {background:#febc2e;border-color:#de9c1d}
+.window-controls button:nth-child(3) {background:#28c840;border-color:#1eab32}
+.window-controls:hover button,.window-controls:focus-within button {color:#49372d}
+.messenger aside,.photo-app aside {background:#34364299;border-color:#10141a55}
+.search-label {background:#16192255;border:1px solid #ffffff08;border-radius:7px}
+.contact {border-radius:8px}
+.contact.selected {background:#396eb8bd;box-shadow:inset 0 1px #ffffff0b}
+.contact.selected small {color:#d0def3}
+.contact.selected i {background:#f1f5ff}
+.conversation {background:#1b1e26a8}
+.conversation>header {background:#292b3455}
+.message p {background:#393b46;border-radius:14px 14px 14px 4px;font-size:12px}
+.message.me p {background:linear-gradient(#348bf5,#2376e5);color:white;border-radius:14px 14px 4px 14px}
+.messages .date {color:#9b9baa}
+.conversation footer {background:#2b2c3533}
+.pin,#board-back {background:#458df41a;border-color:#729de966;color:#bdd7ff;border-radius:7px}
+.pin.saved {background:#ffffff05;border-color:#ffffff15;color:#a8b6c8}
+.dock {bottom:25px;padding:10px 12px 13px;gap:8px;background:#d8dbec2b;border:1px solid #ffffff40;border-radius:22px;backdrop-filter:blur(40px) saturate(170%);box-shadow:0 12px 35px #10172c55,inset 0 1px #ffffff25;align-items:end}
+.dock button {width:55px;height:53px;flex-shrink:0}
+.dock .dock-icon {display:grid;place-items:center;flex:none;width:49px;height:49px;border-radius:12px;border:1px solid #ffffff40;box-shadow:0 3px 5px #17223555,inset 0 1px #ffffff66;transition:transform .2s cubic-bezier(.2,.8,.2,1);transform-origin:center bottom}
+.dock-icon svg {width:40px;height:40px;filter:drop-shadow(0 1px 1px #0002)}
+.dock .messenger {background:linear-gradient(#77e563,#24b63f)}
+.dock .mail {background:linear-gradient(#59bafc,#1676e9)}
+.dock .browser {background:linear-gradient(#fafcff,#cbd7e8)}
+.dock .photos {background:linear-gradient(#fff,#e9e8ee)}
+.dock .files {background:linear-gradient(#f1faff,#b8e3fa)}
+.dock .notes {background:linear-gradient(#fffaf0,#e8e6dd)}
+.dock .maps {background:linear-gradient(#f3f9ef,#b6d7c9)}
+.dock .trash {background:linear-gradient(#bfc7d455,#717c9955);border-color:#e2e8ef44}
+.dock .evidence {background:linear-gradient(#e89882,#af6259)}
+.dock button:last-child {border-left:1px solid #ffffff25;padding-left:10px;width:66px;margin-left:3px}
+.dock small {position:absolute;left:50%;bottom:68px;transform:translateX(-50%) translateY(4px);padding:6px 10px;background:#333746ee;border:1px solid #ffffff30;border-radius:6px;color:#fff;font-size:11px;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;box-shadow:0 4px 15px #0002}
+.dock button:hover small,.dock button:focus-visible small {opacity:1;transform:translateX(-50%) translateY(0)}
+.dock button:hover .dock-icon,.dock button:focus-visible .dock-icon {transform:translateY(-8px) scale(1.16)}
+.dock em {background:#f54d51;color:#fff;border:1px solid #ff9696;padding:1px 5px;font-size:10px;right:1px;top:-3px}
+.running:after {left:50%;bottom:-8px;width:4px;height:4px;transform:translateX(-50%);background:#e8eaf4}
+.desktop-shortcuts {right:28px;gap:26px}
+.desktop-shortcuts button {font-size:11px;color:white}
+.desktop-shortcuts button:first-child>span {font-size:0;position:relative;width:57px;height:41px;margin:12px auto 3px;background:linear-gradient(#78d5fa,#349bdc);border-radius:4px;box-shadow:0 2px 4px #0004,inset 0 2px #d4f4ff88}
+.desktop-shortcuts button:first-child>span:before {content:'';position:absolute;left:0;top:-6px;width:25px;height:8px;background:#7bcff0;border-radius:4px 5px 0 0}
+.desktop-shortcuts button:not(:first-child)>span {width:42px;height:50px;margin:auto;border-radius:3px;background:linear-gradient(#fff,#d7dce7);color:#8492ab;font-size:33px;box-shadow:0 2px 4px #0004;text-shadow:none}
+.notification {background:#444551ba;backdrop-filter:blur(40px) saturate(150%);border-color:#ffffff35;border-radius:16px;box-shadow:0 12px 35px #11172d55}
+.notification .avatar {border-radius:10px;background:linear-gradient(#77dd68,#35b54a)}
+.case-status {color:#c7cedf;text-shadow:0 2px 5px #101525}
+.case-status small,.save-state,.session-menu {color:#b1bbce}
+.lock .brand {top:22px;left:25px}
+.login-card {position:relative;z-index:1}
+.login-card h1 {font-size:44px;letter-spacing:7px;font-weight:300}
+.login-card .avatar.large {width:85px;height:85px;font-size:34px;background:linear-gradient(145deg,#a8b9d7,#667da6);border:2px solid #ffffff66;box-shadow:0 8px 25px #111c3d33;color:#fff}
+.login-card h2 {font-size:19px;font-weight:600;text-shadow:0 2px 5px #0004}
+.login-card .dim,.login-card h1 span,.lock-hint {color:#c0c7d8}
+.password {background:#d8dced26;border-color:#ffffff22;border-radius:24px;backdrop-filter:blur(20px);overflow:hidden}
+.password input::placeholder {color:#d1d7e5}
+.password button {color:#eef2fa}
+.lock footer {color:#c1cada;z-index:1}
+.board,dialog {background:#2d303ce8;backdrop-filter:blur(35px);border-color:#ffffff25;border-radius:16px}
+@media(max-width:760px) {
+  .topbar {padding:0 12px}.topbar>div {gap:12px}
+  .dock {width:calc(100% - 20px);gap:2px;padding:8px 5px 12px;border-radius:18px}
+  .dock button {width:10%;height:37px;flex-shrink:1}
+  .dock .dock-icon {width:34px;height:34px;border-radius:9px}
+  .dock-icon svg {width:29px;height:29px}
+  .dock button:last-child {width:12%;padding-left:5px;margin-left:0}
+  .dock small {bottom:51px;font-size:9px}
+  .dock button:hover .dock-icon {transform:translateY(-4px) scale(1.08)}
+  .desktop-title h1 {font-size:40px}.message p {font-size:11px}
+  .window-bar {height:44px}.login-card h1 {font-size:36px}
+}
+@media(prefers-reduced-motion:reduce) {.dock .dock-icon,.dock small {transition:none}}

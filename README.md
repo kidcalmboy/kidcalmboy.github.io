@@ -1,43 +1,30 @@
-# Infrastructure Archive
+# LAST SEEN
 
-A first-person infrastructure lab for exploring a future GitHub study archive.
+NOVA OS 안에서 실종된 친구의 디지털 흔적을 조사하는 한국어 스크린라이프 미스터리.
 
-## Current Status
+현재 범위: Chapter 01 프로토타입. 로그인, 드래그/최소화/크기 전환 창, Dock, 네 명의 대화, 세 장의 단서용 그래픽, 사진 확대와 메타데이터, 증거 수집, 조건부 메시지, 자동 저장 및 초기화. 본편 분량이나 실제 사진/음성 에셋은 아직 포함하지 않습니다. Mail/Files/Trash는 일부 열람 및 후속 챕터 안내입니다.
 
-The local development version contains a fullscreen 3D lab, mouse-look, WASD movement, Space jumping, static collision and an E-operated door leading through a corridor to a Linux room. The door stays open after activation. ESC pauses and releases the mouse. Actual repository contents and archive boxes are not connected yet.
+## 실행
 
-Legacy terminal JSX files remain as migration references; the active entry point is src/main.tsx. See docs/ARCHITECTURE.md for the longer-term design. Changes appear on the public site only after pushing main and a successful deployment.
+Node.js 22 이상에서 `npm run dev`, http://127.0.0.1:5180 접속. 의존성 설치나 빌드가 필요 없습니다. `npm test`로 상태 로직을 검증합니다. 서버는 로컬 개발 전용입니다.
 
-## Tech Stack
+GitHub Pages는 저장소 루트 정적 파일을 배포합니다. 이 버전에서는 배포 설정이나 push를 자동 수행하지 않습니다. Google Fonts가 차단되어도 시스템 글꼴로 플레이 가능합니다.
 
-- Vite
-- React
-- TypeScript (strict for the new application)
-- Three.js / React Three Fiber
-- CSS
-- GitHub REST API (planned)
-- GitHub Pages
+## 구조
 
-## Development
+- src/data.js: 대화 및 증거 데이터
+- src/state.js: 저장 데이터 검증과 진행 조건
+- src/main.js: OS 화면, 앱, 상호작용, 이벤트
+- style.css: 반응형 UI와 코드 기반 그래픽
 
-```bash
-npm install
-npm run dev
-```
+게임 내 날짜는 2028-10-15 실종, 10-18 조사로 통일했습니다. 영수증 자체는 민재의 현장 체류를 입증하지 않으며, 플레이어가 시간차를 의심하도록 구성했습니다. 모든 장소와 기록은 허구입니다.
 
-## Build
+## 수동 검증
 
-```bash
-npm run lint
-npm run build
-node --experimental-strip-types --test tests/physics.test.ts
-```
+1. 잘못된 로그인은 오류, 0617은 바탕화면 진입.
+2. Messenger에서 김민재 대화를 읽고 증거 저장.
+3. Photos에서 영수증 확대, 메타데이터 확인, 증거 저장.
+4. 5초 뒤 민재의 새 메시지. Evidence에서 두 기록과 완료 안내 확인.
+5. 새로고침해 저장된 단서/메시지 유지 확인. 세션 설정에서 취소/초기화 확인.
 
-Production builds are deployed to [kidcalmboy.github.io](https://kidcalmboy.github.io/) with GitHub Actions.
-
-## Roadmap
-
-- Add archive boxes and a Markdown document viewer
-- Generate content from explicitly configured public study repositories
-- Provide accessible document mode and mobile navigation
-- Measure rendering performance and improve assets
+후속 단계: 삭제 파일 복원 → PROJECT_N 암호 → 내부 검색 및 인물 관계 → 녹음과 최종 추리. 결말은 이 프로토타입에 노출하지 않습니다.
