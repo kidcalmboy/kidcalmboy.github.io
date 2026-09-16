@@ -1,0 +1,94 @@
+.photo-inspection {
+  padding: 10px 20px;
+  background: #242c35;
+  border-top: 1px solid var(--border-soft);
+}
+.photo-inspection button {
+  font-size: 11px;
+  color: var(--accent);
+  padding: 4px 0;
+}
+.photo-inspection p {
+  font-size: 11px;
+  color: #c6ced9;
+  margin: 8px 0;
+  line-height: 1.8;
+}
+.transit-capture {
+  background: #e5e9ec;
+  color: #283747;
+  min-width: 290px;
+  padding: 30px;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px #0004;
+}
+.transit-capture h2 {
+  font-size: 23px;
+  font-weight: 500;
+}
+.transit-capture p {
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+  font-size: 14px;
+}
+.transit-line {
+  height: 40px;
+  border-left: 2px dashed #68879a;
+  margin-left: 5px;
+}
+.transit-capture small {
+  font-size: 10px;
+  color: #647a8b;
+}
+.photo-grid .transit-capture {
+  transform: scale(0.45);
+  flex-shrink: 0;
+}
+.photo-grid .transit-capture h2 {
+  font-size: 20px;
+}
+.deductions > article {
+  padding: 18px;
+  margin: 16px 0;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: #ffffff03;
+}
+.deductions h3 {
+  font-size: 15px;
+  font-weight: 500;
+}
+.deductions p {
+  font-size: 12px;
+}
+.deductions article > div {
+  display: grid;
+  gap: 8px;
+}
+.deductions button {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ffffff20;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.deductions button:hover {
+  background: #6da9ff20;
+}
+.deductions [role="status"] {
+  color: #cbb69b;
+  min-height: 15px;
+}
+.deduction-conclusion {
+  color: #accdbd;
+}
+.route-comparison {
+  padding: 15px;
+  border-left: 2px solid var(--accent);
+  background: #6da9ff10;
+  margin: 18px 0;
+}
+.route-comparison h3 {
+  font-size: 14px;
+}

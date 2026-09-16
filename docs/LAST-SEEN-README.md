@@ -1,24 +1,4 @@
-# LAST POST · NOVA OS
-
-현재 기본 화면은 `src/lastpost/`의 LAST POST입니다. MOMENT, Browser, Mail, Notes 네 앱으로 조사하는 한국어 스크린라이프 미스터리이며, 플레이 가능한 개발 버전입니다.
-
-- 현재 단서에 맞춘 접이식 ‘다음 조사 안내’와 바로 이동 버튼
-- 12개 추가 대화 그룹, DM 첨부 자료, 증언을 이용한 대체 해결 경로
-- 과거 대화와 현재 대화 분리, 읽지 않은 메시지, 질문 선택과 답장 대기 상태
-- Notes 증거 저장·수정과 세 가지 증거를 제출하는 엔딩
-- 자동 저장 키 `lastPostSave.v1` (기존 게임 저장은 별도 보존)
-
-실행은 `npm ci` 후 `npm run dev`, 주소는 http://127.0.0.1:5180 입니다. `npm test`, `npm run build`, 개발 서버 실행 중 `npx playwright test`로 검증합니다. Playwright는 설치된 Edge를 사용합니다.
-
-시나리오와 개발자용 풀이: [LAST POST 진행 문서](docs/LAST-POST-STORY.md). 게임 내 검색과 메일은 가상 자료만 이용하며 실제 외부 전송은 없습니다. 사진은 게임용 합성 에셋이고, 내레이션은 화면 텍스트입니다. 장편 최종 출시본이나 배우 녹음 버전은 아닙니다.
-
-GitHub Pages는 main 브랜치 push 시 GitHub Actions로 빌드·배포합니다. 공개 반영 여부는 Actions 실행 결과에서 확인하세요.
-
-이전 LAST SEEN은 `/last-seen.html`로 보존했습니다. 아래 내용은 **이전 게임에만 해당하는 설명**입니다. 별도 사본은 [이전 README](docs/LAST-SEEN-README.md)에 있습니다.
-
----
-
-## 이전 버전: LAST SEEN · NOVA OS
+# LAST SEEN · NOVA OS
 
 React + Vite + TypeScript 기반 한국어 스크린라이프 미스터리.
 

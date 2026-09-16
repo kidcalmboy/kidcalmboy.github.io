@@ -1,0 +1,527 @@
+/* Three distinct visual references, one fictional NOVA desktop. */
+.window-content form.chrome-toolbar {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.window-content form.chrome-toolbar input {
+  margin: 0;
+  max-width: none;
+  min-width: 0;
+}
+.nova-desktop > .topbar {
+  height: 30px;
+  background: #17203766;
+  backdrop-filter: blur(32px) saturate(150%);
+  font-size: 12px;
+}
+.nova-desktop > .topbar .nova-menu {
+  font-weight: 750;
+  letter-spacing: 1.2px;
+}
+.nova-window {
+  border-radius: 13px;
+  border: 1px solid #c8d2df33;
+}
+.nova-window > .window-bar {
+  height: 46px;
+  background: linear-gradient(#42434b, #35363d);
+  font-size: 12px;
+}
+.nova-window.active {
+  box-shadow:
+    0 28px 75px #0009,
+    0 0 0 1px #0a0f1755;
+}
+.window-controls button {
+  height: 12px;
+  width: 12px;
+}
+.nova-desktop .dock {
+  bottom: 8px;
+  backdrop-filter: blur(40px) saturate(150%);
+  background: #b9c6d447;
+}
+.messenger {
+  background: #1d1e22;
+}
+.messenger > aside {
+  background: #303139bb;
+  width: 245px;
+  padding: 19px 10px;
+  border-right: 1px solid #0c0d1280;
+}
+.messenger .aside-heading {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  color: #f1f2f6;
+  padding-left: 10px;
+}
+.messenger .app-search {
+  background: #17181d55;
+  border: 1px solid #ffffff08;
+  border-radius: 8px;
+  font-size: 11px;
+  margin: 16px 5px 14px;
+}
+.messenger .contact {
+  padding: 12px 9px;
+  border-radius: 9px;
+  gap: 10px;
+}
+.messenger .contact.selected {
+  background: #376fc4;
+  border: 0;
+  box-shadow: none;
+}
+.messenger .contact b {
+  font-size: 12px;
+  font-weight: 600;
+}
+.messenger .contact small {
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 3px;
+  color: #b0b1bc;
+}
+.messenger .contact.selected small {
+  color: #d5e4ff;
+}
+.messenger .avatar {
+  width: 38px;
+  height: 38px;
+  font-size: 11px;
+  background: linear-gradient(145deg, #87978b, #536d60);
+  color: #f0f4f1;
+}
+.messenger .harin.avatar {
+  background: linear-gradient(145deg, #aa8eab, #76677f);
+}
+.messenger .jihoon.avatar {
+  background: linear-gradient(145deg, #879ebb, #5d7594);
+}
+.messenger .conversation {
+  background: #1c1d21;
+}
+.messenger .conversation > header {
+  background: #24252bcc;
+  min-height: 64px;
+  border-bottom: 1px solid #ffffff09;
+  padding: 12px 22px;
+}
+.messenger .conversation > header .avatar {
+  width: 34px;
+  height: 34px;
+}
+.messenger .conversation header b {
+  font-size: 13px;
+  font-weight: 600;
+}
+.messenger .conversation header small {
+  font-size: 9px;
+  color: #9596a3;
+}
+.messenger .messages {
+  padding: 8px 25px 20px;
+}
+.messenger .message p {
+  background: #38393f;
+  border-radius: 17px 17px 17px 5px;
+  padding: 8px 13px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #f0f0f3;
+}
+.messenger .message.me p {
+  background: #247dec;
+  border-radius: 17px 17px 5px 17px;
+  color: white;
+  box-shadow: none;
+}
+.messenger .message time {
+  font-size: 8px;
+  color: #8a8d98;
+}
+.messenger .date {
+  font-size: 9px;
+  font-weight: 500;
+  color: #898c98;
+}
+.messenger .conversation > footer {
+  background: #222329;
+  border-top: 1px solid #ffffff08;
+}
+.messenger .reply-panel {
+  background: #24252b;
+  padding: 12px 18px;
+}
+.messenger .reply-options {
+  gap: 5px;
+}
+.messenger .reply-options button {
+  border: 1px solid #ffffff12;
+  border-radius: 9px;
+  background: #33353d;
+  font-size: 11px;
+  padding: 8px 11px;
+}
+.messenger .reply-options button:hover {
+  background: #365a8a;
+}
+.messenger .reply-panel > small {
+  font-size: 9px;
+  color: #9297a5;
+}
+.chrome-browser {
+  background: #202124;
+  color: #e8eaed;
+  position: relative;
+  font-family: Arial, "Segoe UI", sans-serif;
+}
+.nova-window:has(.chrome-browser) > .window-bar {
+  background: #202124;
+  border-bottom: 0;
+}
+.nova-window:has(.chrome-browser) > .window-bar > span {
+  color: #9aa0a6;
+  font-size: 11px;
+}
+.chrome-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  height: 42px;
+  padding: 7px 9px 0;
+  background: #202124;
+}
+.chrome-tab {
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  max-width: 210px;
+  flex: 1;
+  height: 35px;
+  border-radius: 10px 10px 0 0;
+  background: #292a2d;
+}
+.chrome-tab.selected {
+  background: #35363a;
+}
+.chrome-tab > button:first-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 12px;
+  font-size: 11px;
+  text-align: left;
+}
+.chrome-tab > button:first-child > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tab-favicon {
+  display: inline-grid;
+  place-items: center;
+  background: #7299d5;
+  border-radius: 4px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: #fff;
+}
+.chrome-tab > button:last-child {
+  width: 25px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #bcc0c7;
+  margin-right: 5px;
+}
+.chrome-tab > button:last-child:hover {
+  background: #5f6368;
+}
+.new-tab {
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.new-tab:hover {
+  background: #383a3f;
+}
+.chrome-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 8px 11px;
+  background: #35363a;
+}
+.chrome-toolbar > button {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 28px;
+  font-size: 19px;
+  border-radius: 50%;
+  padding: 0;
+  color: #bdc1c6;
+}
+.chrome-toolbar > button:hover {
+  background: #4b4d52;
+}
+.chrome-toolbar .chrome-profile {
+  background: #677c8f;
+  color: #fff;
+  font-size: 12px;
+  width: 25px;
+  height: 25px;
+  margin: 0 3px;
+}
+.omnibox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  background: #202124;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  padding: 0 12px;
+  height: 34px;
+}
+.omnibox:focus-within {
+  border-color: #8ab4f8;
+  box-shadow: 0 0 0 1px #8ab4f8;
+}
+.omnibox > span {
+  color: #9aa0a6;
+  font-size: 19px;
+}
+.omnibox input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 7px 0;
+  font-size: 12px;
+  border-radius: 0;
+  color: #e8eaed;
+  outline: none;
+}
+.omnibox input:focus-visible {
+  outline: none;
+}
+.omnibox button {
+  padding: 2px;
+  font-size: 20px;
+  color: #bdc1c6;
+}
+.bookmarks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 16px;
+  background: #35363a;
+  border-bottom: 1px solid #161719;
+  color: #bdc1c6;
+}
+.bookmarks button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  font-size: 10px;
+  border-radius: 4px;
+}
+.bookmarks button:hover {
+  background: #515257;
+}
+.bookmarks small {
+  font-size: 9px;
+  margin-left: auto;
+  color: #9aa0a6;
+}
+.bookmark-dot {
+  width: 9px;
+  height: 9px;
+  background: #7aa5c2;
+  border-radius: 50%;
+}
+.chrome-menu {
+  position: absolute;
+  right: 8px;
+  top: 92px;
+  width: 245px;
+  z-index: 2;
+  background: #303134;
+  box-shadow: 0 5px 20px #0007;
+  border: 1px solid #5f6368;
+  border-radius: 8px;
+  padding: 15px;
+}
+.chrome-menu button {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+}
+.chrome-menu p {
+  font-size: 11px;
+  color: #a9adb3;
+  line-height: 1.7;
+}
+.chrome-menu small {
+  font-size: 10px;
+}
+.chrome-page {
+  background: #202124;
+}
+.chrome-page.new-tab-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px !important;
+}
+.new-tab-page h1 {
+  font-size: 54px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8eaed;
+  margin: 5px 0 30px;
+}
+.new-tab-page h1 span {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 5px;
+  margin-top: 7px;
+  color: #8e959f;
+}
+.chrome-page form.home-search {
+  display: flex !important;
+  align-items: center;
+  width: min(490px, 90%);
+  background: #303134;
+  border: 1px solid #5f6368;
+  border-radius: 28px;
+  height: 46px;
+  padding: 0 17px;
+  gap: 10px;
+}
+.home-search > span {
+  font-size: 23px;
+  color: #9aa0a6;
+}
+.chrome-page .home-search input {
+  flex: 1;
+  min-width: 0;
+  max-width: none !important;
+  background: none;
+  border: 0;
+  outline: none;
+  color: #e8eaed;
+  font-size: 12px;
+  padding: 10px 0;
+  margin: 0 !important;
+}
+.home-search button {
+  color: #a3b9dc;
+  font-size: 20px;
+}
+.search-shortcuts {
+  display: flex;
+  gap: 18px;
+  margin-top: 26px;
+  max-width: 100%;
+}
+.search-shortcuts button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 68px;
+  font-size: 10px;
+  color: #d6d9df;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-shortcuts span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #303134;
+  font-size: 22px;
+}
+.local-note {
+  font-size: 10px !important;
+  color: #777f8b;
+  margin-top: 35px;
+}
+.chrome-page.results-page {
+  padding: 15px 35px !important;
+}
+.search-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #3c4043;
+  padding: 3px 0 12px;
+  font-size: 11px;
+  color: #9aa0a6;
+}
+.search-nav b {
+  color: #8ab4f8;
+}
+.search-nav small {
+  margin-left: auto;
+  font-size: 9px;
+}
+.results-page > h1 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 22px 0 5px;
+  color: #c4c8d0;
+}
+.chrome-page .search-result {
+  padding: 15px 0;
+  border-color: #33363b;
+}
+.chrome-page .search-result h2 {
+  font-size: 19px;
+  color: #8ab4f8;
+  font-weight: 400;
+  margin: 12px 0 6px;
+}
+.chrome-page .search-result p {
+  font-size: 12px;
+  color: #bdc1c6;
+  line-height: 1.8;
+}
+.chrome-page .search-result small {
+  color: #b4b9c3;
+  font-size: 10px;
+}
+.result-favicon {
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: #3c4043;
+  margin-right: 9px;
+  font-size: 10px;
+}

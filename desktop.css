@@ -1,0 +1,39 @@
+/* Desktop-specific Finder conventions. Wallpaper is original vector artwork. */
+.desktop,.lock {background:#527e9c url('./assets/nova-coast.svg') center center / cover no-repeat}
+.desktop:before,.lock:before {display:none}
+.desktop:after,.lock:after {opacity:.035}
+.topbar {position:relative;z-index:8;height:29px;background:#171e3545;border-bottom:0;box-shadow:none;padding:0 18px;font-size:12px}
+.topbar>div {gap:19px;height:100%}
+.topbar button {height:100%;padding:0 3px;font-size:12px}
+.topbar .nova-menu {font-size:12px;font-weight:750;letter-spacing:1px;padding:0 7px}
+.topbar button:hover {background:#ffffff20;border-radius:4px}
+.topbar .spotlight {font-size:23px;line-height:1}
+.shell-dropdown {position:absolute;top:33px;z-index:15;min-width:215px;padding:6px;background:#303c4be8;backdrop-filter:blur(35px);border:1px solid #ffffff30;border-radius:7px;box-shadow:0 12px 35px #0005}
+.shell-dropdown button {display:block;width:100%;padding:7px 12px;text-align:left;font-size:12px;border-radius:4px}
+.shell-dropdown button:hover,.shell-dropdown button:focus {background:#297bea;outline:none}
+.desktop-shortcuts {top:52px;right:20px;gap:17px;width:96px;z-index:1}
+.desktop-shortcuts button {width:96px;min-height:90px;display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;border:1px solid transparent;border-radius:5px}
+.desktop-shortcuts button .desktop-art {font-size:initial;position:static;display:block;width:62px;height:62px;margin:0;background:none;border-radius:0;box-shadow:none;color:inherit}
+.desktop-shortcuts button .desktop-art:before {display:none}
+.desktop-art svg {width:62px;height:62px;filter:drop-shadow(0 3px 3px #10233266)}
+.desktop-shortcuts b {font-size:12px;font-weight:500;padding:2px 5px;border-radius:3px;text-shadow:0 1px 3px #000,0 1px 6px #0008}
+.desktop-shortcuts button.selected {background:#ffffff17;border-color:#ffffff30}
+.desktop-shortcuts button.selected b {background:#2368c9;text-shadow:none}
+.case-status {display:none}
+.save-state {right:14px;bottom:8px;font-size:9px;opacity:.7;text-shadow:0 1px 3px #000}
+.dock {bottom:8px;gap:7px;padding:9px 10px 12px;background:#b9c8d74d;border-color:#ffffff55;border-radius:19px}
+.dock button:last-child {border-left:1px solid #ffffff40}
+.dock [data-app="files"] .dock-icon {background:linear-gradient(#74d1fc,#2794e3)}
+.dock [data-app="trash"] .dock-icon {background:none;border:0;box-shadow:none}
+.dock [data-app="trash"] svg {width:45px;height:45px}
+.notification {top:42px}
+.lock {background-position:center}
+.lock .login-card {padding:25px;background:#15294318;border-radius:24px;text-shadow:0 1px 10px #12274444}
+.lock footer {text-shadow:0 1px 3px #172e46}
+@media(max-width:760px){
+  .topbar {padding:0 9px;font-size:10px}.topbar>div {gap:9px}
+  .topbar button {font-size:10px}.topbar [data-shell-menu="file"],.topbar [data-shell-menu="view"],.topbar [data-shell-menu="help"] {display:none}
+  .desktop-shortcuts {right:10px;gap:9px}.desktop-shortcuts button {min-height:80px}
+  .desktop-shortcuts button .desktop-art,.desktop-art svg {width:53px;height:53px}
+  .dock {gap:2px;padding:8px 5px 12px;bottom:16px}.save-state{bottom:2px;font-size:7px}
+}
