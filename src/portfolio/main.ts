@@ -3,20 +3,18 @@ import { profile } from "./profile";
 import "./style.css";
 
 document.querySelector("#root")!.innerHTML = `
-<div id="scene" aria-label="컴공 학생의 3D 방"></div>
-<div class="grain"></div>
-<header><a class="brand" href="#">k<span>.</span></a><div class="site-label">KIDCALMBOY <span>/ PERSONAL SPACE</span></div><button id="skip">터미널 바로가기 <span>↗</span></button></header>
-<main id="intro"><div class="eyebrow"><i></i> WELCOME TO MY LITTLE CORNER</div><h1>A room full<br>of <em>possibilities.</em></h1><p>생각하고, 만들고, 가끔은 밤을 새우는 곳.<br>제 방에 오신 걸 환영합니다.</p><button class="primary" id="enter">컴퓨터 앞에 앉기 <span>↗</span></button><div class="intro-note">방을 드래그해 둘러보세요</div></main>
-<div id="room-ui"><div class="room-caption"><span>01 / THE ROOM</span><strong>조금 늦은 밤, 새로운 시작.</strong></div><button id="interact" hidden> E &nbsp; 컴퓨터에 앉기</button><div class="controls"><kbd>W A S D</kbd> 이동 <b>·</b> 드래그 시점 <b>·</b> <kbd>E</kbd> 앉기</div></div>
-<footer><span>DESIGNED TO BE EXPLORED</span><span><i></i> OPEN TO POSSIBILITIES</span><span>SCROLL LESS. EXPLORE MORE. ↗</span></footer>
-<section id="terminal" aria-label="포트폴리오 터미널" hidden><div class="terminal-window"><div class="terminal-bar"><div class="dots"><b></b><b></b><b></b></div><span>guest@kidcalmboy: ~</span><button id="exit" aria-label="방으로 돌아가기">방으로 돌아가기 ↗</button></div><div id="terminal-body"><div id="log" role="log" aria-live="polite"></div><form id="command-form"><label for="command">guest<span>@</span>kidcalmboy <b>~</b> $</label><input id="command" aria-label="터미널 명령어" autocomplete="off" autocapitalize="off" spellcheck="false"></form></div><div class="terminal-bottom"><span><i></i> CONNECTED TO MY WORLD</span><span>Tab 자동완성 · ↑↓ 기록 · Esc 나가기</span></div></div><div class="quick-commands">${["help", "about", "projects", "skills", "contact"].map((c) => `<button data-command="${c}">${c}</button>`).join("")}</div></section>`;
+<div id="scene" tabindex="0" aria-label="3D 학생 방. WASD로 이동하고 마우스로 둘러보세요. 컴퓨터 앞으로 다가가면 터미널이 열립니다."></div>
+<header id="masthead"><span class="edition">PERSONAL SPACE — 001</span><h1>KIDCALMBOY</h1><a href="https://github.com/kidcalmboy" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></header>
+<div id="room-ui"><div class="crosshair" aria-hidden="true">+</div><div class="room-title"><span>THE ROOM</span><p id="proximity">컴퓨터 앞으로 걸어가세요.</p></div><div class="controls"><span>W A S D &nbsp; 이동</span><span>드래그 &nbsp; 둘러보기</span><span>화면 클릭 &nbsp; 마우스 시점 · ESC 해제</span></div><span class="room-index">01 — EXPLORATION</span><div class="touch-pad" aria-label="이동 버튼"><button data-move="KeyW" aria-label="앞으로 이동">↑</button><button data-move="KeyA" aria-label="왼쪽으로 이동">←</button><button data-move="KeyS" aria-label="뒤로 이동">↓</button><button data-move="KeyD" aria-label="오른쪽으로 이동">→</button></div></div>
+<button id="fallback-entry" hidden>터미널 열기</button>
+<section id="terminal" aria-label="포트폴리오 터미널" hidden><div class="terminal-bar"><span>KIDCALMBOY / TERMINAL</span><button id="exit" aria-label="방으로 돌아가기">ESC &nbsp; EXIT ↗</button></div><div id="terminal-body"><div id="log" role="log" aria-live="polite"></div><form id="command-form"><label for="command">guest@kidcalmboy:~$</label><input id="command" aria-label="터미널 명령어" autocomplete="off" autocapitalize="off" spellcheck="false"></form></div><div class="terminal-bottom"><span>SESSION 001 &nbsp; / &nbsp; CONNECTED</span><span>TAB 자동완성 &nbsp; ↑↓ 기록</span><div class="quick-commands">${["help", "about", "projects", "skills", "contact"].map((c) => '<button data-command="' + c + '">' + c + "</button>").join("")}</div></div></section>`;
 const $ = <T extends HTMLElement = HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 let mode: "room" | "seating" | "terminal" = "room";
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("#202a29");
-scene.fog = new THREE.Fog("#202a29", 12, 24);
+scene.background = new THREE.Color("#c6c6c3");
+scene.fog = new THREE.Fog("#c6c6c3", 12, 24);
 const camera = new THREE.PerspectiveCamera(
   Fifty(),
   innerWidth / innerHeight,
@@ -24,10 +22,10 @@ const camera = new THREE.PerspectiveCamera(
   40,
 );
 function Fifty() {
-  return innerWidth < 700 ? 65 : 53;
+  return innerWidth < 700 ? 72 : 64;
 }
-camera.position.set(3.3, 2.15, 5.6);
-camera.lookAt(-0.25, 1.35, -1.8);
+camera.position.set(0.1, 1.68, 4.6);
+camera.lookAt(0.1, 1.68, -3.1);
 let renderer: THREE.WebGLRenderer | undefined;
 try {
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -41,23 +39,32 @@ try {
   $("scene").append(renderer.domElement);
 } catch {
   $("scene").innerHTML =
-    '<p class="fallback">3D 화면을 사용할 수 없습니다. 터미널 바로가기로 포트폴리오를 볼 수 있어요.</p>';
+    '<p class="fallback">3D 화면을 사용할 수 없습니다. 아래 버튼으로 포트폴리오에 입장하세요.</p>';
+  $("fallback-entry").hidden = false;
 }
-scene.add(new THREE.HemisphereLight("#b1cbd3", "#403127", 1.6));
-const lamp = new THREE.PointLight("#ffd294", 34, 9, 2);
+scene.add(new THREE.HemisphereLight("#ffffff", "#9a9a97", 2.8));
+const lamp = new THREE.PointLight("#ffffff", 17, 9, 2);
 lamp.position.set(1.35, 2.35, -2.4);
 lamp.castShadow = true;
 lamp.shadow.mapSize.set(1024, 1024);
 scene.add(lamp);
-const moon = new THREE.DirectionalLight("#9ac6d8", 2.4);
+const moon = new THREE.DirectionalLight("#ffffff", 3.2);
 moon.position.set(-5, 5, -1);
 scene.add(moon);
 const materials = new Map<string, THREE.MeshStandardMaterial>();
+function monochrome(color: string) {
+  const c = new THREE.Color(color);
+  const value = c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722;
+  return new THREE.Color().setRGB(value, value, value);
+}
 function mat(color: string) {
   if (!materials.has(color))
     materials.set(
       color,
-      new THREE.MeshStandardMaterial({ color, roughness: 0.8 }),
+      new THREE.MeshStandardMaterial({
+        color: monochrome(color),
+        roughness: 0.65,
+      }),
     );
   return materials.get(color)!;
 }
@@ -106,9 +113,9 @@ function sign(
   c.width = 768;
   c.height = 384;
   const ctx = c.getContext("2d")!;
-  ctx.fillStyle = bg;
+  ctx.fillStyle = "#" + monochrome(bg).getHexString();
   ctx.fillRect(0, 0, 768, 384);
-  ctx.fillStyle = fg;
+  ctx.fillStyle = "#" + monochrome(fg).getHexString();
   ctx.font = `${size}px monospace`;
   text.split("\n").forEach((line, i) => ctx.fillText(line, 45, 80 + i * 58));
   const tx = new THREE.CanvasTexture(c);
@@ -134,12 +141,12 @@ for (let i = 0; i < 18; i++)
       -4 + j * 2 + (i % 2) * 0.12,
       ["#77634e", "#806c54", "#705c48"][i % 3],
     );
-box(9, 4, 0.16, 0, 2, -4, "#657069");
-box(0.16, 4, 10, -4.5, 2, 1, "#747c70");
+box(9, 4, 0.16, 0, 2, -4, "#d6d6d3");
+box(0.16, 4, 10, -4.5, 2, 1, "#d9d9d6");
 box(9, 0.13, 0.12, 0, 0.1, -3.85, "#a5a28c");
-box(0.16, 4, 10, 4.5, 2, 1, "#657069");
-box(9, 4, 0.16, 0, 2, 6, "#747c70");
-box(9, 0.12, 10, 0, 4.05, 1, "#8c9180");
+box(0.16, 4, 10, 4.5, 2, 1, "#d6d6d3");
+box(9, 4, 0.16, 0, 2, 6, "#d9d9d6");
+box(9, 0.12, 10, 0, 4.05, 1, "#e4e4e1");
 box(9, 0.15, 1, 0, -0.1, 5.5, "#6b5542");
 box(0.95, 2.5, 0.07, 2.7, 1.25, 5.88, "#706b55");
 box(0.09, 0.09, 0.08, 2.35, 1.2, 5.81, "#b8ad88");
@@ -150,14 +157,14 @@ box(0.12, 2, 0.06, -4.25, 2.4, -1.9, "#b5b7a7");
 box(0.12, 0.07, 2.45, -4.25, 2.4, -1.9, "#b5b7a7");
 box(0.5, 0.1, 2.9, -4.2, 1.3, -1.9, "#c2bda5");
 // Desk, computer and keyboard.
-box(3.5, 0.14, 1.35, 0.3, 1.12, -2.8, "#ae8e63");
+box(3.5, 0.14, 1.35, 0.3, 1.12, -2.8, "#aaaaaa");
 for (const x of [-1.2, 1.8])
   for (const z of [-3.3, -2.3]) box(0.09, 1.1, 0.09, x, 0.55, z, "#292e2b");
 box(0.65, 0.06, 0.4, 0.1, 1.23, -3, "#292e30");
 box(0.09, 0.38, 0.09, 0.1, 1.43, -3.1, "#333a39");
 const monitor = box(1.65, 0.94, 0.1, 0.1, 1.95, -3.1, "#222827");
 const display = sign(
-  "SYSTEM OFF\n\n[ press E to power on ]",
+  "KIDCALMBOY\n\nterminal ready_",
   1.52,
   0.81,
   0.1,
@@ -284,129 +291,178 @@ for (let i = 0; i < 7; i++) {
 }
 
 const keys = new Set<string>();
-let dragging = false,
-  lastX = 0,
-  lastY = 0;
 const euler = new THREE.Euler(0, 0, 0, "YXZ");
 euler.setFromQuaternion(camera.quaternion);
-let seatStart = 0;
+const surface = $("scene");
+let dragging = false,
+  lastX = 0,
+  lastY = 0,
+  seatStart = 0;
 const startPos = new THREE.Vector3(),
   startQuat = new THREE.Quaternion();
-const seatPos = new THREE.Vector3(0.1, 1.85, -1.65);
+const seatPos = new THREE.Vector3(0.1, 1.75, -1.65);
+const screenPos = new THREE.Vector3(0.1, 1.96, -2.67);
 const targetCamera = camera.clone();
 targetCamera.position.copy(seatPos);
-targetCamera.lookAt(0.1, 1.94, -3.1);
+targetCamera.lookAt(0.1, 1.96, -3.1);
+const screenQuat = new THREE.Quaternion();
 function sit() {
   if (mode !== "room") return;
   keys.clear();
+  dragging = false;
+  if (document.pointerLockElement) document.exitPointerLock();
   mode = "seating";
-  $("intro").hidden = true;
-  $("interact").hidden = true;
+  $("room-ui").hidden = true;
+  document.body.classList.add("seating");
   startPos.copy(camera.position);
   startQuat.copy(camera.quaternion);
   seatStart = performance.now();
 }
 function openTerminal() {
+  keys.clear();
+  dragging = false;
   mode = "terminal";
   $("terminal").hidden = false;
   $("room-ui").hidden = true;
+  $("masthead").hidden = true;
+  surface.inert = true;
+  document.body.classList.remove("seating");
   document.body.classList.add("terminal-open");
   if (!$("log").children.length) {
-    line("KIDCALM OS  /  PERSONAL TERMINAL", "muted");
-    line(`Hello, world.\n저는 ${profile.name}입니다.`, "welcome");
+    line("KIDCALM OS [Version 1.0]", "muted");
+    line("Welcome to " + profile.name + ".", "welcome");
     line(
-      "작은 호기심에서 시작하는 개발의 기록.\n명령어를 입력해 저의 이야기를 살펴보세요.",
+      "명령어를 입력해 포트폴리오를 탐색하세요. help로 명령어를 확인할 수 있습니다.",
     );
     run("help", false);
   }
-  setTimeout(() => $<HTMLInputElement>("command").focus(), 50);
+  $<HTMLInputElement>("command").focus({ preventScroll: true });
 }
 function leave() {
+  keys.clear();
   mode = "room";
   $("terminal").hidden = true;
   $("room-ui").hidden = false;
+  $("masthead").hidden = false;
+  surface.inert = false;
   document.body.classList.remove("terminal-open");
-  camera.position.set(3.3, 2.15, 5.6);
-  camera.lookAt(-0.25, 1.35, -1.8);
+  camera.position.set(0.1, 1.68, -0.1);
+  camera.quaternion.identity();
   euler.setFromQuaternion(camera.quaternion);
-  $("intro").hidden = false;
+  surface.focus({ preventScroll: true });
 }
-$("enter").onclick = sit;
-$("skip").onclick = openTerminal;
 $("exit").onclick = leave;
-$("interact").onclick = sit;
-const surface = $("scene");
+$("fallback-entry").onclick = openTerminal;
+function look(dx: number, dy: number) {
+  euler.y -= dx * 0.003;
+  euler.x = THREE.MathUtils.clamp(euler.x - dy * 0.003, -1.1, 1.1);
+  camera.quaternion.setFromEuler(euler);
+}
 surface.onpointerdown = (e) => {
+  if (mode !== "room") return;
+  surface.focus({ preventScroll: true });
   dragging = true;
   lastX = e.clientX;
   lastY = e.clientY;
   surface.setPointerCapture(e.pointerId);
 };
-surface.onpointerup = () => (dragging = false);
+surface.onpointerup = (e) => {
+  dragging = false;
+  if (
+    e.pointerType === "mouse" &&
+    mode === "room" &&
+    !document.pointerLockElement
+  ) {
+    // Pointer lock is optional; drag remains usable if the browser refuses it.
+    surface.requestPointerLock?.()?.catch(() => {});
+  }
+};
 surface.onpointercancel = () => (dragging = false);
 surface.onpointermove = (e) => {
-  if (!dragging || mode !== "room") return;
-  $("intro").hidden = true;
-  euler.y -= (e.clientX - lastX) * 0.004;
-  euler.x = THREE.MathUtils.clamp(
-    euler.x - (e.clientY - lastY) * 0.003,
-    -0.7,
-    0.7,
-  );
-  camera.quaternion.setFromEuler(euler);
+  if (mode !== "room" || document.pointerLockElement) return;
+  if (dragging) look(e.clientX - lastX, e.clientY - lastY);
   lastX = e.clientX;
   lastY = e.clientY;
 };
-const raycaster = new THREE.Raycaster();
-surface.ondblclick = (e) => {
-  raycaster.setFromCamera(
-    new THREE.Vector2(
-      (e.clientX / innerWidth) * 2 - 1,
-      (-e.clientY / innerHeight) * 2 + 1,
-    ),
-    camera,
-  );
-  if (raycaster.intersectObjects([monitor, display]).length) sit();
-};
+document.addEventListener("mousemove", (e) => {
+  if (mode === "room" && document.pointerLockElement === surface)
+    look(e.movementX, e.movementY);
+});
+const movementCodes = [
+  "KeyW",
+  "KeyA",
+  "KeyS",
+  "KeyD",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+];
 window.addEventListener("keydown", (e) => {
   if (mode === "terminal") {
-    if (e.key === "Escape") leave();
+    if (e.code === "Escape") {
+      e.preventDefault();
+      leave();
+    }
     return;
   }
-  if ((e.target as HTMLElement).closest("button,a,input")) return;
-  if (
-    [
-      "w",
-      "a",
-      "s",
-      "d",
-      "ArrowUp",
-      "ArrowDown",
-      "ArrowLeft",
-      "ArrowRight",
-    ].includes(e.key)
-  ) {
+  if (mode !== "room" || (e.target as HTMLElement).closest("input,textarea"))
+    return;
+  if (movementCodes.includes(e.code)) {
     e.preventDefault();
-    keys.add(e.key.toLowerCase());
-    $("intro").hidden = true;
+    keys.add(e.code);
   }
-  if (e.key.toLowerCase() === "e") sit();
 });
-window.addEventListener("keyup", (e) => keys.delete(e.key.toLowerCase()));
+window.addEventListener("keyup", (e) => keys.delete(e.code));
 window.addEventListener("blur", () => {
   keys.clear();
   dragging = false;
 });
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) keys.clear();
+});
+document
+  .querySelectorAll<HTMLButtonElement>("[data-move]")
+  .forEach((button) => {
+    button.onpointerdown = (e) => {
+      e.preventDefault();
+      if (mode === "room") keys.add(button.dataset.move!);
+      button.setPointerCapture(e.pointerId);
+    };
+    button.onpointerup = button.onpointercancel = () =>
+      keys.delete(button.dataset.move!);
+    button.onlostpointercapture = () => keys.delete(button.dataset.move!);
+  });
+function blocked(x: number, z: number) {
+  return (
+    (x < -2.12 && z > -0.4 && z < 3.15) ||
+    (x > -1.7 && x < 2.3 && z < -1.98) ||
+    (x > 2.48 && z < -2.05)
+  );
+}
 let previous = performance.now();
 function animate(now: number) {
   requestAnimationFrame(animate);
   const dt = Math.min((now - previous) / 1000, 0.05);
   previous = now;
   if (mode === "seating") {
-    const t = reduced ? 1 : Math.min((now - seatStart) / 1300, 1),
-      s = t * t * (3 - 2 * t);
-    camera.position.lerpVectors(startPos, seatPos, s);
-    camera.quaternion.slerpQuaternions(startQuat, targetCamera.quaternion, s);
+    const t = reduced ? 1 : Math.min((now - seatStart) / 1400, 1);
+    const ease = (n: number) => n * n * (3 - 2 * n);
+    if (t < 0.55) {
+      camera.position.lerpVectors(startPos, seatPos, ease(t / 0.55));
+      camera.quaternion.slerpQuaternions(
+        startQuat,
+        targetCamera.quaternion,
+        ease(t / 0.55),
+      );
+    } else {
+      camera.position.lerpVectors(seatPos, screenPos, ease((t - 0.55) / 0.45));
+      camera.quaternion.slerpQuaternions(
+        targetCamera.quaternion,
+        screenQuat,
+        ease((t - 0.55) / 0.45),
+      );
+    }
     if (t === 1) openTerminal();
   }
   if (mode === "room") {
@@ -416,19 +472,28 @@ function animate(now: number) {
     forward.normalize();
     const side = new THREE.Vector3().crossVectors(forward, camera.up);
     const move = new THREE.Vector3();
-    if (keys.has("w") || keys.has("arrowup")) move.add(forward);
-    if (keys.has("s") || keys.has("arrowdown")) move.sub(forward);
-    if (keys.has("d") || keys.has("arrowright")) move.add(side);
-    if (keys.has("a") || keys.has("arrowleft")) move.sub(side);
-    move.normalize().multiplyScalar(dt * 2.2);
-    const next = camera.position.clone().add(move);
-    next.x = THREE.MathUtils.clamp(next.x, -3.95, 3.95);
-    next.z = THREE.MathUtils.clamp(next.z, -1.85, 5.8);
-    if (!(next.x < -2.18 && next.z < 3 && next.z > -0.5))
-      camera.position.copy(next);
-    $("interact").hidden = !$("intro").hidden;
+    if (keys.has("KeyW") || keys.has("ArrowUp")) move.add(forward);
+    if (keys.has("KeyS") || keys.has("ArrowDown")) move.sub(forward);
+    if (keys.has("KeyD") || keys.has("ArrowRight")) move.add(side);
+    if (keys.has("KeyA") || keys.has("ArrowLeft")) move.sub(side);
+    move.normalize().multiplyScalar(dt * 2.5);
+    const x = THREE.MathUtils.clamp(camera.position.x + move.x, -4.1, 4.1);
+    const z = THREE.MathUtils.clamp(camera.position.z + move.z, -3.5, 5.65);
+    if (!blocked(x, camera.position.z)) camera.position.x = x;
+    if (!blocked(camera.position.x, z)) camera.position.z = z;
+    const atDesk =
+      Math.abs(camera.position.x - 0.1) < 0.65 &&
+      camera.position.z < -0.93 &&
+      camera.position.z > -1.98;
+    const facingScreen = forward.z < -0.65;
+    const near =
+      Math.abs(camera.position.x - 0.1) < 1.1 && camera.position.z < 1;
+    $("proximity").textContent = near
+      ? "앞으로 다가가면 컴퓨터를 사용합니다."
+      : "컴퓨터 앞으로 걸어가세요.";
+    if (atDesk && facingScreen && move.lengthSq() > 0) sit();
   }
-  renderer?.render(scene, camera);
+  if (mode !== "terminal") renderer?.render(scene, camera);
 }
 requestAnimationFrame(animate);
 addEventListener("resize", () => {
