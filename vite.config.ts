@@ -5,7 +5,11 @@ export default defineConfig({
   base: "./",
   build: {
     rollupOptions: {
-      input: { main: "index.html", lastSeen: "last-seen.html" },
+      input: {
+        main: "index.html",
+        lastSeen: "last-seen.html",
+        lastPost: "last-post.html",
+      },
     },
   },
 });
